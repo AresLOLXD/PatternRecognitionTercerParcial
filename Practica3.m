@@ -6,6 +6,7 @@ global movimientos;
 global mapaMarcados;
 global alto;
 global ancho;
+global position;
 
 global formas;
 global imagenColoreada;
@@ -104,8 +105,11 @@ for i=1:contador
     end
     if(min_distance<10000)
         fprintf('%d %s\n',i,nombre);
+        pos = [position{i}(1)-10 position{i}(2)];
+        imagenColoreada = insertText(imagenColoreada,pos,nombre);
     end
 end
+imshow(imagenColoreada)
 
 function busqueda(color,posY,posX)
     global mapaMarcados;
@@ -126,11 +130,12 @@ end
 function separar(matrix,contador)
     global imagenColoreada;
     global formas;
+    global position;
     formas={};          % separar figuras para identificar forma
-    RGB=imagenColoreada;
     for i=1:contador
         [row,col]=find(matrix==i);
-        RGB = insertText(RGB,[min(col),min(row)],int2str(i));
+        imagenColoreada = insertText(imagenColoreada,[min(col),min(row)],int2str(i));
+        position{end+1} = [mean(col) mean(row)];
         formas{end+1}=matrix(min(row):max(row),min(col):max(col));
         [row,col] = find(formas{end}~=i);   % filtrar
         for j=1:length(row)
@@ -141,8 +146,6 @@ function separar(matrix,contador)
             formas{end}(row(j),col(j)) = 1;
         end
     end
-    
-    imshow(RGB);
 end
 
 function raw_moments(forma)
