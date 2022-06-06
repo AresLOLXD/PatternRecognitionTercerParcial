@@ -2,6 +2,7 @@ clc
 clear all
 close all
 warning off all
+format long;
 global movimientos;
 global mapaMarcados;
 global alto;
@@ -22,11 +23,12 @@ movimientos=[
 ];
 
 diccionario_hu={
-{'Circulo',[    0.159155950125469   0                   0                   0                   0                   0                    0]},
-{'Triangulo',[  0.194844421004016   0.000852606338626   0.033025253276506   0.005077149142085   0.000060312324868   0.000013832097450   -0.007562986555972]},
-{'Corazon',[    0.185494752865170   0.002844914796864   0.119645081542564   0.011990439545155   0.000445174096434  -0.000049245492345   -0.017662017812297 ]},
-{'Estrella',[   0.216740624973792   0.000326093386463   0.043811033690056   0.004840943130283   0.000070489440657  -0.000002450833026   -0.007244366317560]},
-{'Cuadro',[     0.166659259259259   0                   0                   0                   0                   0                    0]},
+{'Circulo',[0.1592    0.0000    0.0007    0.0001    0.0000   -0.0000   -0.0001]},
+{'Rectangulo',[0.1766    0.0034    0.0627    0.0070    0.0001         0   -0.0104]},
+{'Triangulo',[0.1917    0.0002    0.0058    0.0000    0.0000   -0.0000   -0.0001]},
+{'Corazon',[0.1726    0.0015    0.0557    0.0056    0.0001   -0.0000   -0.0084 ]},
+{'Estrella',[0.2170    0.0045    0.5242    0.0582    0.0102   -0.0000   -0.0822]},
+{'Cuadro',[0.1669    0.0001    0.0017    0.0002    0.0000         0   -0.0003]},
 };
 
 %diccionario_hu={
@@ -45,7 +47,7 @@ diccionario_hu={
 
 figure(1)
 subplot(1,2,1)
-imagen=imread("Figuras3.png");
+imagen=imread("FigurasBase\Triangulo.png");
 imshow(imagen);
 title('Original')
 subplot(1,2,2)
@@ -94,19 +96,7 @@ for i=1:contador
     central_moments()
     invariants_nij()
     hu_moments()
-    nombre='';
-    for j=1:size(diccionario_hu,1)
-        aux = norm(hu([1:2,4:end])-diccionario_hu{j}{2}([1:2,4:end]));
-        if aux<min_distance
-            min_distance = aux;
-            nombre = diccionario_hu{j}{1};
-        end
-    end
-    if(min_distance<10000)
-        fprintf('%d %s\n',i,nombre);
-        pos = [position{i}(1)-10 position{i}(2)];
-        imagenColoreada = insertText(imagenColoreada,pos,nombre);
-    end
+    disp(hu)
 end
 imshow(imagenColoreada)
 

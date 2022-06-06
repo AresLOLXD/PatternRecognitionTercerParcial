@@ -14,7 +14,7 @@ movimientos=[
 
 figure(1)
 subplot(3,1,1)
-imagen=imread("Figuras.bmp");
+imagen=imread("Figuras3.png");
 imshow(imagen);
 title('Original')
 subplot(3,1,2)
