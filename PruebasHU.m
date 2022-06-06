@@ -47,7 +47,7 @@ diccionario_hu={
 
 figure(1)
 subplot(1,2,1)
-imagen=imread("FigurasBase\Triangulo.png");
+imagen=imread("FigurasBase\Triangulo2.png");
 imshow(imagen);
 title('Original')
 subplot(1,2,2)
