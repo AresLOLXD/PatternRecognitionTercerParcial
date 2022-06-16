@@ -140,7 +140,7 @@ for i=1:length(objetos)
             labelFigura = "Desconocido";
     end
 
-    text(objeto.Centroid(1), objeto.Centroid(2), labelFigura,'Color','g','FontWeight','bold','FontName',"Times");
+    text(objeto.Centroid(1), objeto.Centroid(2), labelFigura,'Color','w','BackgroundColor','black','FontWeight','bold','FontName',"Times");
 end
 
 elem = [llaves armella tornillos colasDePato rondanas];
